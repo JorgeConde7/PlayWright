@@ -2,35 +2,33 @@ import { Page, Locator } from 'playwright';
 
 export class CheckoutPage {
   readonly page: Page;
-  readonly firstNameInput: Locator;
-  readonly lastNameInput: Locator;
-  readonly postalCodeInput: Locator;
-  readonly continueButton: Locator;
-  readonly finishButton: Locator;
-  readonly confirmationMessage: Locator;
+  readonly nombres: Locator;
+  readonly apellidos: Locator;
+  readonly codigoPostal: Locator;
+  readonly btnContinuar: Locator;
+  readonly btnFinish: Locator;
+  readonly mensajeConfirmación: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.firstNameInput = page.locator('[data-test="firstName"]');
-    this.lastNameInput = page.locator('[data-test="lastName"]');
-    this.postalCodeInput = page.locator('[data-test="postalCode"]');
-    this.continueButton = page.locator('[data-test="continue"]');
-    this.finishButton = page.locator('[data-test="finish"]');
-    this.confirmationMessage = page.locator('.complete-header');
+    this.nombres = page.locator('[data-test="firstName"]');
+    this.apellidos = page.locator('[data-test="lastName"]');
+    this.codigoPostal = page.locator('[data-test="postalCode"]');
+    this.btnContinuar = page.locator('[data-test="continue"]');
+    this.btnFinish = page.locator('[data-test="finish"]');
+    this.mensajeConfirmación = page.locator('.complete-header');
   }
 
-  async fillCheckoutForm(firstName: string, lastName: string, postalCode: string) {
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.postalCodeInput.fill(postalCode);
-    await this.continueButton.click();
+  async agregoDatosContacto(firstName: string, lastName: string, postalCode: string) {
+    await this.nombres.fill(firstName);
+    await this.apellidos.fill(lastName);
+    await this.codigoPostal.fill(postalCode);
+    await this.btnContinuar.click();
   }
 
-  async completeCheckout() {
-    await this.finishButton.click();
+  async clickCheckout() {
+    await this.btnFinish.click();
+    await this.page.waitForTimeout(3000);
   }
 
-  async getConfirmationMessage(): Promise<string> {
-    return await this.confirmationMessage.innerText();
-  }
 }

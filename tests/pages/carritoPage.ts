@@ -1,6 +1,6 @@
 import { Page, Locator } from 'playwright';
 
-export class CartPage {
+export class CarritoPage {
   readonly page: Page;
   readonly checkoutButton: Locator;
 
@@ -15,5 +15,6 @@ export class CartPage {
 
   async checkout() {
     await this.checkoutButton.click();
+    
   }
 }

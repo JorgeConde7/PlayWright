@@ -1,6 +1,6 @@
 import { Page, Locator } from 'playwright';
 
-export class ProductsPage {
+export class ProductoPage {
   readonly page: Page;
   readonly title: Locator;
   readonly cartIcon: Locator;
@@ -11,12 +11,13 @@ export class ProductsPage {
     this.cartIcon = page.locator('.shopping_cart_link');
   }
 
-  async addProduct(productName: string) {
-    // Localiza el producto por nombre y da clic en su botón de agregar
-    await this.page.locator(`text=${productName}`).locator('xpath=..').locator('button').click();
+  async agregarProducto(productName: string) {
+   const product = this.page.locator('.inventory_item', { hasText: productName });
+  await product.locator('button').click();
   }
 
-  async goToCart() {
+  async clickCarrito() {
     await this.cartIcon.click();
+      await this.page.waitForTimeout(3000);
   }
 }

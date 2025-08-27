@@ -10,4 +10,4 @@ Feature: Login de usuarios en Sauce Demo
   Scenario: Login fallido con usuario bloqueado
     Given que el usuario navega a la página de Sauce Demoa
     When ingresa credenciales "locked_out_user" y "secret_sauce"
-    Then debería ver un mensaje de error
+    Then valido el mensaje de error "Epic sadface: Sorry, this user has been locked out."
